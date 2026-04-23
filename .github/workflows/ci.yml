@@ -1,0 +1,57 @@
+name: CI
+
+# Security notes:
+# - This workflow uses zero untrusted input. No references to github.event.*
+#   issue/PR titles, bodies, comments, or commit messages appear in any run: step.
+# - The only expression interpolation is `matrix.os`, which is defined inline
+#   within this file and therefore trusted.
+# - No secrets are used. No write permissions are granted beyond the default.
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Lint shell scripts
+        run: |
+          shellcheck scripts/install.sh ci/smoke.sh
+          shellcheck -e SC2034 templates/hooks/commit-msg templates/hooks/pre-push || true
+
+  smoke:
+    name: install smoke test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run smoke test
+        run: bash ci/smoke.sh
+
+  python-syntax:
+    name: python syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile all helper scripts
+        run: python3 -m compileall -q scripts/

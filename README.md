@@ -6,30 +6,69 @@ Build.MD turns your Git repository into a complete project management system. Sp
 
 No Jira. No ADO. No context switching.
 
-## Quick Start
+---
+
+## Requirements
+
+- Git 2.9+ (for `core.hooksPath` support)
+- Bash 4+
+- Python 3.9+ (standard library only — no `pip install`)
+- A modern browser (for the local dashboard)
+
+Build.MD has **no runtime dependencies** beyond the above. No Node, no Docker, no package manager. Every file it installs is plain text or a standard-library Python script.
+
+## Install
+
+Build.MD installs from a local clone — it does not support `curl | bash` by design (the installer needs the templates, schemas, and scripts as siblings on disk to copy from). **Read the script before running it.**
 
 ```bash
-# Install into any project
-curl -fsSL https://raw.githubusercontent.com/Jimthetaxguy/build-md/main/scripts/install.sh | bash
+git clone https://github.com/Jimthetaxguy/build-md.git
+cd build-md
 
-# Then tell your agent:
-# "Run build-md init"
+# Audit the installer (takes 5 minutes to read end-to-end):
+less scripts/install.sh
+
+# Preview every action without modifying anything:
+./scripts/install.sh /path/to/your/project --dry-run
+
+# Install:
+./scripts/install.sh /path/to/your/project
 ```
 
-The init flow asks about your project, team, and workflow preferences, then generates everything: agent configs, documentation structure, enforcement hooks, and a local dashboard.
+Every install writes a timestamped receipt to `<target>/.build-md-install-receipt.txt` listing every action taken. See [`SECURITY.md`](SECURITY.md) for the full safety model.
+
+### Installer flags
+
+| Flag | Purpose |
+|---|---|
+| `--dry-run` | Print the plan and exit without writing anything. |
+| `--yes` / `-y` | Non-interactive. Required when stdin is not a TTY (e.g., CI). |
+| `--no-hooks` | Skip Git hook installation. |
+| `-h` / `--help` | Show help. |
 
 ## What It Does
 
 Build.MD is a **meta-skill** — it teaches AI coding agents and human contributors the same project management conventions through a shared contract.
 
 - **AGENTS.md** as the canonical instruction file (Linux Foundation standard, native to Codex)
-- **Platform adapters** for Claude Code, Cursor (.mdc), GitHub Copilot, and VS Code
+- **Platform adapters** for Claude Code, Cursor (`.mdc`), GitHub Copilot, and VS Code
 - **Structured Markdown** with YAML frontmatter for specs, stories, notes, and decisions
 - **Git hooks** that enforce commit conventions and trailer requirements
 - **A change ledger** that auto-generates a traceable record of significant changes
 - **Source code annotations** (`rnpm[impl SPEC-ID]`) for spec-to-code traceability
 - **A local dashboard** that visualizes project state from repo data — no external database
 - **24 curated principles** from Anthropic, OpenAI, Google, NVIDIA, Meta, Microsoft, xAI, SSI, and more
+
+## What It Does Not Do
+
+Explicit non-goals. If a future version breaks any of these, that's a regression.
+
+- **No network calls during install.** Installer reads/writes only in the local clone and target directory.
+- **No telemetry.** Build.MD does not phone home. Ever.
+- **No global configuration changes.** `git config` writes are repo-local. Shell configs (`.bashrc`, `.zshrc`) are not modified.
+- **No external services.** No Jira, Linear, Slack, or webhook integrations. The repo is the only backend.
+- **No binary artifacts.** Every tracked file is plain text.
+- **No runtime dependencies beyond the requirements above.** No `pip install`, no `npm install`.
 
 ## Architecture
 
@@ -80,7 +119,35 @@ Build.MD uses a nine-layer architecture. See [SKILL.md](SKILL.md) for the full t
 
 Build.MD ships with 24 curated principles from leading AI companies and researchers. They're embedded into agent configs during init and updated via `scripts/refresh-principles.py`.
 
-Sources include: Anthropic (Dario Amodei), OpenAI (Sam Altman), NVIDIA (Jensen Huang), xAI (Elon Musk), Google DeepMind, Meta FAIR, Microsoft (Satya Nadella), SSI (Ilya Sutskever), Andrej Karpathy, LangChain, Ramp, Replit, Harvey AI, ToltIQ, Hebbia, and Sakana AI.
+Sources include: Anthropic, OpenAI, NVIDIA, xAI, Google DeepMind, Meta FAIR, Microsoft, SSI, Andrej Karpathy, LangChain, Ramp, Replit, Harvey AI, ToltIQ, Hebbia, and Sakana AI.
+
+## Troubleshooting
+
+**`ERROR: This installer cannot be run via 'curl | bash'`**
+By design. Clone the repo first, then run `./scripts/install.sh`. See the [Install](#install) section.
+
+**`ERROR: stdin is not a TTY`**
+You're running in CI or piping input. Pass `--yes` for non-interactive mode, or `--dry-run` to preview.
+
+**`ERROR: source tree incomplete — missing ...`**
+The `build-md` clone is missing files. Re-clone with `git clone https://github.com/Jimthetaxguy/build-md.git`.
+
+**`ERROR: target directory does not exist`**
+Create the target directory first: `mkdir -p /path/to/project && ./scripts/install.sh /path/to/project`.
+
+**Git hooks not running after install**
+Run `git config --get core.hooksPath` inside the target repo. It should print `.hooks`. If not, re-run the installer without `--no-hooks`.
+
+**Dashboard shows empty state**
+The dashboard reads from `.ledger/changes.json` and `docs/`. Create at least one story (`/new-story "first"`) or commit at least one change matching the trailer convention, then refresh.
+
+## Project Status
+
+Build.MD is actively developed. See [CHANGELOG.md](CHANGELOG.md) for release history and [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute.
+
+## Security
+
+Report security issues privately via GitHub Security Advisories. See [SECURITY.md](SECURITY.md) for the full policy, audit checklist, and safety commitments.
 
 ## Repository
 
