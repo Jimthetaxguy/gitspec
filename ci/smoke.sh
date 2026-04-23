@@ -66,7 +66,7 @@ pass "install receipt well-formed"
 # ── 8. Refuse curl-pipe invocation ────────────────────────────────────────────
 # Simulate by piping the installer to bash with no BASH_SOURCE.
 set +e
-ERR_OUTPUT="$(cat "${REPO_ROOT}/scripts/install.sh" | bash 2>&1)"
+ERR_OUTPUT="$(bash < "${REPO_ROOT}/scripts/install.sh" 2>&1)"
 RC=$?
 set -e
 [[ ${RC} -ne 0 ]] || fail "installer should refuse curl-pipe invocation but succeeded"
