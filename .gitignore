@@ -4,3 +4,4 @@ __pycache__/
 *.deprecated
 node_modules/
 .env
+AUDIT_SUMMARY.md
