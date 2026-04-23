@@ -1,11 +1,29 @@
 # Build.MD Principles Catalog
 
-> Curated best practices from leading AI companies, researchers, and builders.
-> Updated via `scripts/refresh-principles.py`. Each principle cites its source,
-> domain, and whether it's universal or contextual.
+> Curated best practices synthesized from publicly discussed ideas in the AI
+> industry. Updated via `scripts/refresh-principles.py`. Each principle cites
+> the source it draws on, its domain, and whether it's universal or contextual.
 >
 > **Universal** principles are always embedded in agent configs.
 > **Contextual** principles activate based on project type during init.
+
+## Attribution and Disclaimer
+
+The principles below are Build.MD's own paraphrases and interpretations of
+publicly discussed ideas, frameworks, and engineering philosophies. The named
+individuals and organizations in each `**Source:**` line are cited as
+**inspiration**, not as authors of the specific wording that appears here.
+
+- No principle below is a verbatim quotation unless explicitly enclosed in
+  quotation marks with a direct citation.
+- Inclusion of a name or organization in a source line does **not** imply that
+  person or organization has reviewed, endorsed, sponsored, or is affiliated
+  with Build.MD in any way.
+- All company names and trademarks are the property of their respective owners
+  and are used here under fair-use for commentary and attribution.
+- If you are associated with a cited source and believe your attribution is
+  inaccurate or would prefer your name be removed, please open an issue — we
+  will correct or remove the attribution promptly.
 
 ---
 

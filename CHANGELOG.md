@@ -5,15 +5,18 @@ All notable changes to Build.MD are documented in this file. Format based on [Ke
 ## [Unreleased]
 
 ### Added
-- `SECURITY.md` — vulnerability reporting policy and safety commitments.
-- `CONTRIBUTING.md` — contribution workflow and commit style.
+- `SECURITY.md` — intentional-behavior statements and audit checklist (no SLA; explicit no-guarantee-of-response).
+- `CONTRIBUTING.md` — contribution workflow and commit style (explicit skills-pack framing, no maintenance commitment).
 - `CHANGELOG.md` — this file.
 - `ci/smoke.sh` — end-to-end install smoke test (clones into temp dir, runs `--dry-run`, runs real install, asserts expected tree).
 - `.github/workflows/ci.yml` — runs `shellcheck` on shell scripts and `ci/smoke.sh` on every push and PR.
 - `.github/ISSUE_TEMPLATE/` — bug report and feature request templates.
 - `.github/pull_request_template.md` — PR template with checklist.
+- Attribution and disclaimer section in `principles/PRINCIPLES.md` clarifying that source citations indicate inspiration, not endorsement or authorship, and that all trademarks belong to their respective owners.
 
 ### Changed
+- `SKILL.md` install instructions updated to the clone-first pattern (removed placeholder `org/build-md` URLs and the unsupported `curl | bash` and `degit` options).
+- `README.md` "Project Status" reframed as a released skills pack (no maintenance commitment).
 - `scripts/install.sh` hardened:
   - Refuses to run via `curl | bash` (requires a local clone so it can copy templates).
   - Detects non-TTY stdin and requires `--yes` for non-interactive runs.

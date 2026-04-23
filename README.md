@@ -143,11 +143,13 @@ The dashboard reads from `.ledger/changes.json` and `docs/`. Create at least one
 
 ## Project Status
 
-Build.MD is actively developed. See [CHANGELOG.md](CHANGELOG.md) for release history and [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute.
+Build.MD is a released **skills pack**, not an actively-maintained service. The author is not committing to ongoing maintenance, issue response, or PR review. Use it, fork it, adapt it — that's what the MIT license is for. See [CHANGELOG.md](CHANGELOG.md) for what shipped and [CONTRIBUTING.md](CONTRIBUTING.md) if you'd still like to send a PR upstream.
 
-## Security
+## Security and Warranty
 
-Report security issues privately via GitHub Security Advisories. See [SECURITY.md](SECURITY.md) for the full policy, audit checklist, and safety commitments.
+The software is provided **"AS IS"** under the MIT License, without warranty of any kind. See [LICENSE](LICENSE) for the full disclaimer.
+
+If you find a security issue, you may open a private GitHub Security Advisory (**Security → Advisories → New draft**). No response is guaranteed. See [SECURITY.md](SECURITY.md) for the audit checklist and the intentional-behavior statements that describe what the software does and does not do.
 
 ## Repository
 

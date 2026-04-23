@@ -192,23 +192,28 @@ for the update mechanism.
 
 ### Install
 
+Build.MD installs from a local clone. `curl | bash` is refused by design because the installer needs the repo's templates, schemas, and scripts as siblings on disk to copy from. See `README.md` for the full install guide and `SECURITY.md` for the safety model.
+
 ```bash
-# Option 1: One-line install
-curl -fsSL https://raw.githubusercontent.com/org/build-md/main/scripts/install.sh | bash
+git clone https://github.com/Jimthetaxguy/build-md.git
+cd build-md
 
-# Option 2: Clone as template
-degit org/build-md .build-md && .build-md/scripts/install.sh
+# Audit the installer before running it:
+less scripts/install.sh
 
-# Option 3: Claude Code skill
-claude install-skill https://github.com/org/build-md
+# Preview every action without modifying anything:
+./scripts/install.sh /path/to/your/project --dry-run
+
+# Install:
+./scripts/install.sh /path/to/your/project
 ```
 
 The installer:
-1. Detects which agent tools are present
-2. Writes adapters for installed tools + slash commands to `.claude/commands/`
-3. Symlinks hooks into `.git/hooks/`
-4. Creates the canonical `AGENTS.md`
-5. Builds the initial manifest so the applet works immediately
+1. Detects which agent tools are present (informational only)
+2. Copies rule blocks, schemas, helper scripts, and slash commands into the target repo
+3. Installs Git hooks via `core.hooksPath` (local repo config only, never global)
+4. Creates an `AGENTS.md` placeholder for your project
+5. Writes a timestamped install receipt to `.build-md-install-receipt.txt`
 
 ## Slash Commands
 
