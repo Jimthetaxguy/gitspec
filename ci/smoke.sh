@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# End-to-end smoke test for Build.MD.
+# End-to-end smoke test for GitSpec.
 # Runs the installer into a fresh temp directory (both --dry-run and real) and
 # asserts the expected tree is created. Safe to run locally — writes only to
 # a scratch dir under $TMPDIR that it creates and cleans up itself.
@@ -7,7 +7,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SCRATCH="$(mktemp -d -t build-md-smoke-XXXXXX)"
+SCRATCH="$(mktemp -d -t gitspec-smoke-XXXXXX)"
 TARGET="${SCRATCH}/sample-project"
 mkdir -p "${TARGET}"
 
@@ -17,7 +17,7 @@ trap cleanup EXIT
 fail() { echo "FAIL: $1" >&2; exit 1; }
 pass() { echo "PASS: $1"; }
 
-echo "Smoke test — Build.MD installer"
+echo "Smoke test — GitSpec installer"
 echo "  Source: ${REPO_ROOT}"
 echo "  Target: ${TARGET}"
 echo ""
@@ -36,7 +36,7 @@ pass "--dry-run made zero filesystem changes"
 EXPECT=(
   "docs/specs" "docs/stories/archive" "docs/notes" "docs/decisions" "docs/reports"
   ".ledger/changes.json" ".agents/rules" "meta/schemas" "applets/dashboard.html"
-  ".agents/PRINCIPLES.md" "AGENTS.md" ".build-md-install-receipt.txt" ".git"
+  ".agents/PRINCIPLES.md" "AGENTS.md" ".gitspec-install-receipt.txt" ".git"
 )
 for path in "${EXPECT[@]}"; do
   [[ -e "${TARGET}/${path}" ]] || fail "missing expected path: ${path}"
@@ -59,8 +59,8 @@ SCHEMA_COUNT="$(find "${TARGET}/meta/schemas" -name '*.json' | wc -l | tr -d ' '
 pass "schema files copied (${SCHEMA_COUNT} found)"
 
 # ── 7. Assert receipt is well-formed ──────────────────────────────────────────
-grep -q "^Date: " "${TARGET}/.build-md-install-receipt.txt" || fail "receipt missing Date line"
-grep -q "^Source: " "${TARGET}/.build-md-install-receipt.txt" || fail "receipt missing Source line"
+grep -q "^Date: " "${TARGET}/.gitspec-install-receipt.txt" || fail "receipt missing Date line"
+grep -q "^Source: " "${TARGET}/.gitspec-install-receipt.txt" || fail "receipt missing Source line"
 pass "install receipt well-formed"
 
 # ── 8. Refuse curl-pipe invocation ────────────────────────────────────────────

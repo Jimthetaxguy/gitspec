@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build.MD Local Dashboard Server
+GitSpec Local Dashboard Server
 
 Serves the Kanban board and change timeline over HTTP.
 Watches the filesystem and pushes updates via WebSocket.
@@ -113,7 +113,7 @@ def main():
 
     server = HTTPServer((HOST, PORT), BuildMDHandler)
     print(f"╔════════════════════════════════════════╗")
-    print(f"║   Build.MD Dashboard Server — Running  ║")
+    print(f"║   GitSpec Dashboard Server — Running  ║")
     print(f"╚════════════════════════════════════════╝")
     print(f"")
     print(f"  Open: http://{HOST}:{PORT}")

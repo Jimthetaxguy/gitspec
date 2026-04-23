@@ -1,6 +1,26 @@
 # Changelog
 
-All notable changes to Build.MD are documented in this file. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+All notable changes to GitSpec are documented in this file. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.0.0] — 2026-04-23
+
+### BREAKING
+- **Project renamed from Build.MD → GitSpec.** GitHub repository moved from `Jimthetaxguy/build-md` to `Jimthetaxguy/gitspec` (GitHub auto-redirects the old URL). The kebab-case identifier is now `gitspec`. Display name is `GitSpec`. Install receipt filename is `.gitspec-install-receipt.txt`. Existing v1.x installs continue to work — this is a name change, not an API change. Re-clone from the new URL when convenient.
+
+### Added
+- `/onboard-agent` — slash command. Brings a fresh agent session up to speed in a GitSpec-equipped repo. Reads rule blocks, AGENTS.md, current backlog, and principles, then returns a compact orientation briefing. Solves the cold-start problem for agents joining mid-project.
+- `/rebuild-ledger` — slash command. Re-derives `.ledger/changes.json` from `git log` when it has drifted (after rebase, force-push, manual edits, or corruption). Atomic write with schema validation; never destroys the existing ledger without backup.
+- **Global skill at `~/.claude/skills/gitspec/`** — invoke `/gitspec` from any Claude Code session to learn what GitSpec is, get install instructions, or see the architecture, without needing a target repo.
+
+### Changed
+- All 142 internal references updated from `Build.MD` → `GitSpec` (109 brand) and `build-md` → `gitspec` (33 identifier).
+- `README.md` and `SKILL.md` slash-commands tables updated to include the two new commands.
+
+### Migration
+For users on v1.1.0:
+- The old GitHub URL still works (auto-redirects).
+- Existing installed projects continue to function — the receipt filename does not affect runtime behavior.
+- To install fresh: `git clone https://github.com/Jimthetaxguy/gitspec.git`.
 
 ## [Unreleased]
 
@@ -15,7 +35,7 @@ All notable changes to Build.MD are documented in this file. Format based on [Ke
 - Attribution and disclaimer section in `principles/PRINCIPLES.md` clarifying that source citations indicate inspiration, not endorsement or authorship, and that all trademarks belong to their respective owners.
 
 ### Changed
-- `SKILL.md` install instructions updated to the clone-first pattern (removed placeholder `org/build-md` URLs and the unsupported `curl | bash` and `degit` options).
+- `SKILL.md` install instructions updated to the clone-first pattern (removed placeholder `org/gitspec` URLs and the unsupported `curl | bash` and `degit` options).
 - `README.md` "Project Status" reframed as a released skills pack (no maintenance commitment).
 - `scripts/install.sh` hardened:
   - Refuses to run via `curl | bash` (requires a local clone so it can copy templates).
@@ -24,7 +44,7 @@ All notable changes to Build.MD are documented in this file. Format based on [Ke
   - New `--no-hooks` flag for CI environments that shouldn't install Git hooks.
   - Validates the source tree for required subdirectories before proceeding.
   - Validates the target directory exists before `cd`-ing into it.
-  - Writes a receipt to `<target>/.build-md-install-receipt.txt` on every real install.
+  - Writes a receipt to `<target>/.gitspec-install-receipt.txt` on every real install.
   - Fixes bash precedence ambiguity in agent detection (`[ -f ] || [ -d ] && ...`) with explicit `{ ...; }` grouping.
 - `README.md` clarified:
   - Install section points to `git clone` + `./scripts/install.sh` (the only supported install path) instead of `curl | bash`.

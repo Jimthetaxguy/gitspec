@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Build.MD Principles Refresh Script
+GitSpec Principles Refresh Script
 
-Checks for updates to the Build.MD principles catalog from upstream sources.
+Checks for updates to the GitSpec principles catalog from upstream sources.
 Can be run manually, as a cron job, or as a GitHub Action.
 
 Usage:
@@ -106,12 +106,12 @@ def check_upstream_repo():
                 print(f"Last refreshed: {last_date}")
                 break
     else:
-        print("No principles file found. Run 'build-md init' first.")
+        print("No principles file found. Run 'gitspec init' first.")
 
 
 def list_sources():
     """Print all tracked upstream sources."""
-    print("Build.MD Principles Sources")
+    print("GitSpec Principles Sources")
     print("=" * 50)
     for key, source in UPSTREAM_SOURCES.items():
         print(f"\n{source['name']} ({key})")
@@ -150,7 +150,7 @@ def show_schedule_config(frequency="weekly"):
     print(f"\nGitHub Actions workflow:")
     print(f"""
 # .github/workflows/refresh-principles.yml
-name: Refresh Build.MD Principles
+name: Refresh GitSpec Principles
 on:
   schedule:
     - cron: '{cron}'
@@ -168,7 +168,7 @@ jobs:
       - name: Create issue if updates needed
         run: |
           gh issue create \\
-            --title "Build.MD Principles Refresh - $(date +%Y-%m-%d)" \\
+            --title "GitSpec Principles Refresh - $(date +%Y-%m-%d)" \\
             --body "$(python scripts/refresh-principles.py --report 2>&1)" \\
             --label "documentation"
         env:

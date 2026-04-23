@@ -3,7 +3,7 @@ name: pr-prep
 description: Prepare a pull request — distill notes, generate PR description with notes cleanup section, validate trailers
 ---
 
-Prepare everything needed for a clean Build.MD-compliant pull request.
+Prepare everything needed for a clean GitSpec-compliant pull request.
 
 **Usage:** `/pr-prep` (operates on current branch vs main)
 

@@ -1,4 +1,4 @@
-# Build.MD Principles Catalog
+# GitSpec Principles Catalog
 
 > Curated best practices synthesized from publicly discussed ideas in the AI
 > industry. Updated via `scripts/refresh-principles.py`. Each principle cites
@@ -9,7 +9,7 @@
 
 ## Attribution and Disclaimer
 
-The principles below are Build.MD's own paraphrases and interpretations of
+The principles below are GitSpec's own paraphrases and interpretations of
 publicly discussed ideas, frameworks, and engineering philosophies. The named
 individuals and organizations in each `**Source:**` line are cited as
 **inspiration**, not as authors of the specific wording that appears here.
@@ -18,7 +18,7 @@ individuals and organizations in each `**Source:**` line are cited as
   quotation marks with a direct citation.
 - Inclusion of a name or organization in a source line does **not** imply that
   person or organization has reviewed, endorsed, sponsored, or is affiliated
-  with Build.MD in any way.
+  with GitSpec in any way.
 - All company names and trademarks are the property of their respective owners
   and are used here under fair-use for commentary and attribution.
 - If you are associated with a cited source and believe your attribution is
@@ -45,7 +45,7 @@ If your project management layer adds friction to the decision-making loop, it's
 **Domain:** workflow-design
 
 Don't build layer by layer. Build one complete thing that works end-to-end, then improve 
-it. For Build.MD: the init flow should produce a working system in 60 seconds — not a 
+it. For GitSpec: the init flow should produce a working system in 60 seconds — not a 
 perfect one. A spec with three acceptance criteria and a commit with a trailer is better 
 than a month of planning with no code.
 
@@ -53,7 +53,7 @@ than a month of planning with no code.
 **Source:** Satya Nadella / Microsoft — Developer platform thesis
 **Domain:** workflow-design
 
-If the PM layer slows down the developer, developers will route around it. Every Build.MD 
+If the PM layer slows down the developer, developers will route around it. Every GitSpec 
 convention must pass the test: "Does this make the developer faster or slower?" If slower, 
 it needs to provide enough traceability value to justify the cost — and that justification 
 must be explicit and understood by the team, not imposed.
@@ -71,7 +71,7 @@ and consistent. Prompts are probabilistic.
 **Source:** Elon Musk / xAI — Engineering philosophy
 **Domain:** architecture
 
-The most dangerous requirement is the one nobody questions. Every convention in Build.MD 
+The most dangerous requirement is the one nobody questions. Every convention in GitSpec 
 should have a "why" that can be explained in one sentence. If a rule exists only because 
 "that's how Jira does it," delete it. The framework is opinionated but everything is 
 configurable and overridable because the best process is the one the team actually follows.
@@ -81,7 +81,7 @@ configurable and overridable because the best process is the one the team actual
 **Domain:** safety, alignment
 
 Safety and alignment aren't bolted on after the product works — they're designed into the 
-structure. In Build.MD: the change ledger is append-only (tamper-evident). Stories are 
+structure. In GitSpec: the change ledger is append-only (tamper-evident). Stories are 
 archived, never deleted (reversible). Every feat/fix links to a spec or story (traceable). 
 Hooks enforce at commit time, CI enforces at merge time (defense in depth). These aren't 
 optional quality features — they're the load-bearing walls.
@@ -109,7 +109,7 @@ or a human wrote it.
 **Source:** Google — Engineering Practices, applied broadly
 **Domain:** developer-experience
 
-Don't rely on discipline. Make the default behavior correct. `build-md new-story` generates 
+Don't rely on discipline. Make the default behavior correct. `gitspec new-story` generates 
 the right template. The commit hook catches missing trailers before they hit the repo. 
 The schema validator catches invalid frontmatter before it breaks the board. Discipline 
 failures are system design failures.
@@ -121,7 +121,7 @@ failures are system design failures.
 Every spec, story, decision, and distilled note compounds. A repo with 100 ADRs is 
 dramatically more valuable than one with 10 — not linearly, but exponentially, because 
 each new decision can reference prior ones. The change ledger gains predictive value over 
-time (you can see which specs generate the most churn). Build.MD's append-only design 
+time (you can see which specs generate the most churn). GitSpec's append-only design 
 is intentional: knowledge compounds only if you never throw it away.
 
 ### U-011: Embrace Cognitive Diversity in Agent Teams
@@ -130,7 +130,7 @@ is intentional: knowledge compounds only if you never throw it away.
 
 Different agents have different strengths. Claude is strong at reasoning and long-context. 
 Cursor is fast at in-editor changes. Copilot excels at autocomplete and boilerplate. 
-Build.MD doesn't try to make every agent do everything — it gives them a shared contract 
+GitSpec doesn't try to make every agent do everything — it gives them a shared contract 
 and lets each contribute where it's strongest. The AGENTS.md file is the same; the 
 platform adapters optimize for each tool's interaction model.
 
@@ -156,7 +156,7 @@ Activate when the project involves building AI agents, MCP servers, or workflow 
 
 For multi-step tasks, use an orchestrator that decomposes work and delegates to specialized 
 workers. Each worker has a narrow scope and clear success criteria. The orchestrator handles 
-sequencing, error recovery, and result synthesis. This is how Build.MD itself works: the 
+sequencing, error recovery, and result synthesis. This is how GitSpec itself works: the 
 init flow is an orchestrator; the hooks, ledger script, and manifest builder are workers.
 
 ### C-AGT-002: MCP for Tool Integration
@@ -189,7 +189,7 @@ of how correct its code is.
 **Source:** xAI / Elon Musk — "Verify everything, trust nothing"
 **Domain:** agent-design, safety
 
-Agent-generated output should be validated before it affects the world. Build.MD applies 
+Agent-generated output should be validated before it affects the world. GitSpec applies 
 this through hooks (validate before commit), CI (validate before merge), and the ledger 
 (audit after the fact). For agent-built features specifically: run the tests, check the 
 schema, verify the frontmatter — don't assume the agent got it right just because it 
@@ -214,7 +214,7 @@ together create a reliable enforcement chain.
 **Domain:** security, agent-design
 
 Agents should request only the permissions they need for the current task. An agent writing 
-a story file doesn't need access to deployment credentials. Build.MD's locking mechanism 
+a story file doesn't need access to deployment credentials. GitSpec's locking mechanism 
 (frontmatter `locked_by`) is a lightweight implementation of this — an agent claims only 
 the artifact it's modifying.
 
@@ -232,7 +232,7 @@ The entire history is reconstructable from `git log`.
 **Domain:** security, privacy
 
 When agents process repository data, ensure PII and secrets don't leak into logs, 
-manifests, or generated reports. Build.MD's ledger captures file paths and summaries, 
+manifests, or generated reports. GitSpec's ledger captures file paths and summaries, 
 not file contents. The dashboard reads frontmatter metadata, not document bodies. 
 For sensitive projects, consider running the OpenAI Privacy Filter as a pre-commit 
 step on generated documentation.
@@ -248,7 +248,7 @@ Activate for startups, hackathons, solo projects, and early-stage exploration.
 **Domain:** workflow-design
 
 Build one complete feature touching every layer (data → logic → UI) before polishing any 
-single layer. For Build.MD: create one spec, one story, one commit with a trailer, and 
+single layer. For GitSpec: create one spec, one story, one commit with a trailer, and 
 open the dashboard — before writing the CI pipeline or the distillation workflow.
 
 ### C-RAP-002: Concessions Are Temporary, Architecture Is Permanent
@@ -256,7 +256,7 @@ open the dashboard — before writing the CI pipeline or the distillation workfl
 **Domain:** architecture
 
 Move fast, but know what's cheap to fix later (hardcoded values, missing tests, rough UI) 
-vs what's expensive (wrong data models, coupled architectures, no traceability). Build.MD's 
+vs what's expensive (wrong data models, coupled architectures, no traceability). GitSpec's 
 frontmatter schemas and commit conventions are the architecture — get those right early. 
 The dashboard layout and report formatting are concessions — iterate on those later.
 
@@ -279,7 +279,7 @@ Activate for research projects, data analysis, document-heavy workflows.
 **Domain:** documentation, research
 
 Raw notes accumulate fast and become unreadable. The distillation step — synthesizing raw 
-notes into a structured ADR — is where knowledge becomes institutional. Build.MD enforces 
+notes into a structured ADR — is where knowledge becomes institutional. GitSpec enforces 
 this at PR time (standard/strict enforcement) because without enforcement, distillation 
 is the first thing teams skip under pressure.
 

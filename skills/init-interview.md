@@ -1,6 +1,6 @@
 # Init Interview Flow
 
-When a contributor runs `build-md init`, guide them through this conversation. Ask one 
+When a contributor runs `gitspec init`, guide them through this conversation. Ask one 
 question at a time. Adapt based on answers. Explain why each question matters.
 
 ## Detection Phase (Automatic — No Questions)
@@ -166,7 +166,7 @@ selecting principles relevant to the detected language/framework.
 Print what was created:
 
 ```
-Build.MD initialized for [project_name]
+GitSpec initialized for [project_name]
 
 Created:
   AGENTS.md                    — canonical agent instructions
@@ -189,5 +189,5 @@ Next steps:
   1. Review AGENTS.md and customize for your project
   2. Create your first spec: `touch docs/specs/SPEC-001.md`
   3. Open the dashboard: `python scripts/serve.py`
-  4. Commit everything: `git add . && git commit -m "chore: initialize Build.MD"`
+  4. Commit everything: `git add . && git commit -m "chore: initialize GitSpec"`
 ```

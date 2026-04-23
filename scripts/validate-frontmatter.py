@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build.MD Frontmatter Validator
+GitSpec Frontmatter Validator
 
 Validates YAML frontmatter in story and spec files against JSON schemas.
 Can be run manually or as a pre-commit hook.

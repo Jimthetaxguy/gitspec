@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Build.MD Spec",
+  "title": "GitSpec Spec",
   "description": "Schema for requirement spec YAML frontmatter in docs/specs/",
   "type": "object",
   "required": ["id", "title", "status", "owner"],

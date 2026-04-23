@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build.MD Change Report Generator
+GitSpec Change Report Generator
 
 Generates markdown reports of changes between versions or commit ranges.
 

@@ -1,9 +1,9 @@
 ---
 name: status-check
-description: Scan the repo for Build.MD health — orphaned TODOs, missing trailers, stale stories, spec coverage gaps
+description: Scan the repo for GitSpec health — orphaned TODOs, missing trailers, stale stories, spec coverage gaps
 ---
 
-Run a comprehensive health check on the Build.MD project management layer.
+Run a comprehensive health check on the GitSpec project management layer.
 
 **Steps:**
 
@@ -44,7 +44,7 @@ Run a comprehensive health check on the Build.MD project management layer.
 **Output format:**
 
 ```
-Build.MD Health Check — {date}
+GitSpec Health Check — {date}
 
 Stories: 3 backlog | 2 in_progress | 1 in_review | 5 done | 0 blocked
 Specs: 4 active | 1 proposed | 2 implemented

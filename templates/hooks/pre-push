@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build.MD Pre-Push Hook
+# GitSpec Pre-Push Hook
 #
 # Validates the ledger and commit trailers before pushing to remote.
 # Ensures all feat/fix commits in the push range have Story:/Spec: trailers.

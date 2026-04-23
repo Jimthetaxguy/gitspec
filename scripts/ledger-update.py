@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build.MD Change Ledger — Two-Phase ID Model
+GitSpec Change Ledger — Two-Phase ID Model
 
 Parses conventional commits with Story:/Spec: trailers and appends significant
 changes to .ledger/changes.json. Uses a two-phase ID model to prevent collision

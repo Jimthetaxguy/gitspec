@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build.MD commit-msg hook
+# GitSpec commit-msg hook
 # Validates commit message format and trailer references.
 # Enforcement level is configured during init.
 
@@ -17,12 +17,12 @@ SUBJECT=$(head -1 "$COMMIT_MSG_FILE")
 
 if ! echo "$SUBJECT" | grep -qE '^(feat|fix|perf|refactor|docs|test|chore|style|ci|revert)(\([^)]+\))?!?:'; then
   if [ "$ENFORCEMENT" = "gentle" ]; then
-    echo "⚠️  Build.MD: Commit doesn't follow Conventional Commits format."
+    echo "⚠️  GitSpec: Commit doesn't follow Conventional Commits format."
     echo "   Expected: type(scope): description"
     echo "   Continuing anyway (gentle enforcement)."
     exit 0
   else
-    echo "❌ Build.MD: Commit must follow Conventional Commits format."
+    echo "❌ GitSpec: Commit must follow Conventional Commits format."
     echo "   Expected: type(scope): description"
     echo ""
     echo "   Types: feat, fix, perf, refactor, docs, test, chore, style, ci"
@@ -40,12 +40,12 @@ if [ -n "$TYPE" ]; then
 
   if [ "$HAS_STORY" -eq 0 ] && [ "$HAS_SPEC" -eq 0 ]; then
     if [ "$ENFORCEMENT" = "gentle" ]; then
-      echo "⚠️  Build.MD: feat/fix commits should include a Story: or Spec: trailer."
+      echo "⚠️  GitSpec: feat/fix commits should include a Story: or Spec: trailer."
       echo "   Example footer:"
       echo "   Story: STORY-042"
       exit 0
     else
-      echo "❌ Build.MD: feat/fix commits require a Story: or Spec: trailer."
+      echo "❌ GitSpec: feat/fix commits require a Story: or Spec: trailer."
       echo ""
       echo "   Add one of these to your commit message footer:"
       echo "   Story: STORY-042"
@@ -62,7 +62,7 @@ if [ -n "$TYPE" ]; then
     echo "$COMMIT_MSG" | grep -oE 'Story:\s+STORY-[0-9]+' | while read -r line; do
       STORY_ID=$(echo "$line" | grep -oE 'STORY-[0-9]+')
       if ! find docs/stories -name "${STORY_ID}*" -print -quit 2>/dev/null | grep -q .; then
-        echo "❌ Build.MD: Story '${STORY_ID}' not found in docs/stories/"
+        echo "❌ GitSpec: Story '${STORY_ID}' not found in docs/stories/"
         exit 1
       fi
     done
@@ -71,11 +71,11 @@ if [ -n "$TYPE" ]; then
     echo "$COMMIT_MSG" | grep -oE 'Spec:\s+SPEC-[A-Z0-9-]+' | while read -r line; do
       SPEC_ID=$(echo "$line" | grep -oE 'SPEC-[A-Z0-9-]+')
       if ! find docs/specs -name "${SPEC_ID}*" -print -quit 2>/dev/null | grep -q .; then
-        echo "❌ Build.MD: Spec '${SPEC_ID}' not found in docs/specs/"
+        echo "❌ GitSpec: Spec '${SPEC_ID}' not found in docs/specs/"
         exit 1
       fi
     done
   fi
 fi
 
-echo "✓ Build.MD: Commit message validated"
+echo "✓ GitSpec: Commit message validated"

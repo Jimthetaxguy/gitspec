@@ -1,20 +1,21 @@
 ---
-name: build-md
+name: gitspec
 description: >
   Repo-native project management meta-skill for multi-agent, multi-user codebases. 
   Works across Claude Code, Cursor, Codex, GitHub Copilot, and VS Code agents. 
   Use when setting up a new project, initializing documentation infrastructure, 
   onboarding a contributor (human or agent), or when anyone asks about project planning, 
   specs, stories, change tracking, documentation-driven development, or work visualization. 
-  Triggers on "init", "build.md", "scaffold", "set up my repo", "project management", 
-  "track work", "documentation structure", "how should we organize this project", 
-  "add a story", "new spec", or any mention of repo-native PM. This is the first skill 
-  to reach for when starting any new project or onboarding into an existing one.
+  Triggers on "/gitspec", "gitspec", "init", "scaffold", "set up my repo",
+  "project management", "track work", "documentation structure", "spec-driven development",
+  "git-native PM", "AGENTS.md setup", "how should we organize this project", "add a story",
+  "new spec", or any mention of repo-native PM. This is the first skill to reach for when
+  starting any new project or onboarding into an existing one.
 ---
 
-# Build.MD — Repo-Native Project Intelligence
+# GitSpec — Repo-Native Project Intelligence
 
-Build.MD turns your Git repository into a complete project management system that every 
+GitSpec turns your Git repository into a complete project management system that every 
 AI coding agent and every human contributor understands natively. No Jira. No ADO. No 
 context switching. Your specs, stories, decisions, and progress live next to your code — 
 versioned, reviewable, and machine-readable.
@@ -34,7 +35,7 @@ no data of its own. If it dies, nothing is lost.
 AGENTS.md is now an official standard under the Linux Foundation's Agentic AI Foundation 
 (donated Dec 2025, alongside Anthropic's MCP and Block's Goose). It's the universal 
 instruction file format — Codex reads it natively, and it's converging as the cross-tool 
-standard. Build.MD uses AGENTS.md as the canonical source and generates platform-specific 
+standard. GitSpec uses AGENTS.md as the canonical source and generates platform-specific 
 adapters where needed.
 
 | Agent / Tool | Config File | How It Works |
@@ -48,7 +49,7 @@ adapters where needed.
 
 **Important design principle:** Research shows that LLM-auto-generated AGENTS.md files 
 actually *reduce* task success vs developer-written ones (by 2-4 extra steps per task, 
-20-23% higher inference cost with no quality benefit). Build.MD's init flow generates a 
+20-23% higher inference cost with no quality benefit). GitSpec's init flow generates a 
 *structured template* with the right sections and vocabulary, but leaves content decisions 
 to the human. The agent fills in the scaffolding; the developer fills in the substance.
 
@@ -92,7 +93,7 @@ Lock TTL is configurable (default 30 minutes). Force-unlock via commit trailer.
 
 ### Layer 3 — Appended Rules Pattern
 
-Instead of one monolithic instruction file, Build.MD uses append-only rule blocks:
+Instead of one monolithic instruction file, GitSpec uses append-only rule blocks:
 
 ```
 AGENTS.md                         ← root invariants (never modified after init)
@@ -182,7 +183,7 @@ Read `scripts/generate-report.py` for implementation.
 
 ### Layer 9 — The Principles Engine
 
-Build.MD ships with curated best practices from leading AI companies and researchers, 
+GitSpec ships with curated best practices from leading AI companies and researchers, 
 organized by domain. A refresh script pulls updates on a schedule.
 
 Read `principles/PRINCIPLES.md` for the full catalog. Read `scripts/refresh-principles.py` 
@@ -192,11 +193,11 @@ for the update mechanism.
 
 ### Install
 
-Build.MD installs from a local clone. `curl | bash` is refused by design because the installer needs the repo's templates, schemas, and scripts as siblings on disk to copy from. See `README.md` for the full install guide and `SECURITY.md` for the safety model.
+GitSpec installs from a local clone. `curl | bash` is refused by design because the installer needs the repo's templates, schemas, and scripts as siblings on disk to copy from. See `README.md` for the full install guide and `SECURITY.md` for the safety model.
 
 ```bash
-git clone https://github.com/Jimthetaxguy/build-md.git
-cd build-md
+git clone https://github.com/Jimthetaxguy/gitspec.git
+cd gitspec
 
 # Audit the installer before running it:
 less scripts/install.sh
@@ -213,11 +214,11 @@ The installer:
 2. Copies rule blocks, schemas, helper scripts, and slash commands into the target repo
 3. Installs Git hooks via `core.hooksPath` (local repo config only, never global)
 4. Creates an `AGENTS.md` placeholder for your project
-5. Writes a timestamped install receipt to `.build-md-install-receipt.txt`
+5. Writes a timestamped install receipt to `.gitspec-install-receipt.txt`
 
 ## Slash Commands
 
-Build.MD includes slash commands that give agents (and users) hands-on tools.
+GitSpec includes slash commands that give agents (and users) hands-on tools.
 The skill teaches the agent how to think; the commands tell it what to do.
 
 | Command | What It Does |
@@ -227,13 +228,17 @@ The skill teaches the agent how to think; the commands tell it what to do.
 | `/distill STORY-NNN` | Synthesize raw notes into a structured ADR |
 | `/status-check` | Health check — orphaned TODOs, missing trailers, stale stories, spec coverage |
 | `/pr-prep` | Distill notes + generate PR description + validate trailers |
+| `/onboard-agent` | Brief a fresh agent on local conventions and current backlog (cold-start helper) |
+| `/rebuild-ledger` | Re-derive `.ledger/changes.json` from git log when it has drifted (recovery helper) |
+
+Plus the **global `/gitspec` skill** at `~/.claude/skills/gitspec/`, invokable from any Claude Code session — describes the methodology and points users at install instructions.
 
 Commands live in `commands/` and are installed to `.claude/commands/` during setup.
-For Cursor, they can be invoked conversationally ("run a status check on Build.MD").
+For Cursor, they can be invoked conversationally ("run a status check on GitSpec").
 
 ### Initialize
 
-Tell your agent: **"Run build-md init"**
+Tell your agent: **"Run gitspec init"**
 
 This triggers the interview flow in `skills/init-interview.md`. The agent asks about your 
 project, team, workflow preferences, and enforcement level. Based on answers, it generates 

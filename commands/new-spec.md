@@ -1,6 +1,6 @@
 ---
 name: new-spec
-description: Scaffold a new Build.MD requirement spec with structured frontmatter
+description: Scaffold a new GitSpec requirement spec with structured frontmatter
 ---
 
 Create a new specification file in `docs/specs/`.

@@ -4,7 +4,7 @@
 What this PR changes, in 1–2 sentences.
 
 **Motivation**
-Why this change belongs in Build.MD. Link to the issue it resolves.
+Why this change belongs in GitSpec. Link to the issue it resolves.
 
 Closes #
 

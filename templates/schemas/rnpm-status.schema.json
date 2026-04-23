@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "rnpm-status.schema.json",
-  "title": "Build.MD Shared Status Enumerations",
+  "title": "GitSpec Shared Status Enumerations",
   "description": "Reusable enum definitions for story, spec, change signals, and enforcement levels",
   "definitions": {
     "storyStatus": {

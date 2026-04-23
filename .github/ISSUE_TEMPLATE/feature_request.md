@@ -6,10 +6,10 @@ labels: enhancement
 ---
 
 **The problem you're trying to solve**
-What are you trying to do that Build.MD makes hard or impossible today?
+What are you trying to do that GitSpec makes hard or impossible today?
 
 **Your proposed solution**
-What would you like Build.MD to do?
+What would you like GitSpec to do?
 
 **Which layer does this touch?**
 See the nine-layer architecture in `SKILL.md`. Layer(s):

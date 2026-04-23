@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Build.MD Story",
+  "title": "GitSpec Story",
   "description": "Schema for user story YAML frontmatter in docs/stories/",
   "type": "object",
   "required": ["id", "title", "status", "owner"],

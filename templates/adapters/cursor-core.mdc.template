@@ -1,12 +1,12 @@
 ---
-description: "Build.MD repo-native project management conventions — stories, specs, commits, notes"
+description: "GitSpec repo-native project management conventions — stories, specs, commits, notes"
 alwaysApply: true
 globs:
 ---
 
-# Build.MD Core Rules
+# GitSpec Core Rules
 
-This project uses Build.MD for repo-native project management. Read `AGENTS.md` at the
+This project uses GitSpec for repo-native project management. Read `AGENTS.md` at the
 project root for the full contract.
 
 ## Key Conventions

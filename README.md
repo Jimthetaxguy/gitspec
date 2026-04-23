@@ -1,8 +1,8 @@
-# Build.MD
+# GitSpec
 
 **Repo-native project management for multi-agent, multi-user codebases.**
 
-Build.MD turns your Git repository into a complete project management system. Specs, stories, decisions, and progress tracking live next to your code — versioned, reviewable, and readable by every AI coding agent on your team.
+GitSpec turns your Git repository into a complete project management system. Specs, stories, decisions, and progress tracking live next to your code — versioned, reviewable, and readable by every AI coding agent on your team.
 
 No Jira. No ADO. No context switching.
 
@@ -15,15 +15,15 @@ No Jira. No ADO. No context switching.
 - Python 3.9+ (standard library only — no `pip install`)
 - A modern browser (for the local dashboard)
 
-Build.MD has **no runtime dependencies** beyond the above. No Node, no Docker, no package manager. Every file it installs is plain text or a standard-library Python script.
+GitSpec has **no runtime dependencies** beyond the above. No Node, no Docker, no package manager. Every file it installs is plain text or a standard-library Python script.
 
 ## Install
 
-Build.MD installs from a local clone — it does not support `curl | bash` by design (the installer needs the templates, schemas, and scripts as siblings on disk to copy from). **Read the script before running it.**
+GitSpec installs from a local clone — it does not support `curl | bash` by design (the installer needs the templates, schemas, and scripts as siblings on disk to copy from). **Read the script before running it.**
 
 ```bash
-git clone https://github.com/Jimthetaxguy/build-md.git
-cd build-md
+git clone https://github.com/Jimthetaxguy/gitspec.git
+cd gitspec
 
 # Audit the installer (takes 5 minutes to read end-to-end):
 less scripts/install.sh
@@ -35,7 +35,7 @@ less scripts/install.sh
 ./scripts/install.sh /path/to/your/project
 ```
 
-Every install writes a timestamped receipt to `<target>/.build-md-install-receipt.txt` listing every action taken. See [`SECURITY.md`](SECURITY.md) for the full safety model.
+Every install writes a timestamped receipt to `<target>/.gitspec-install-receipt.txt` listing every action taken. See [`SECURITY.md`](SECURITY.md) for the full safety model.
 
 ### Installer flags
 
@@ -48,7 +48,7 @@ Every install writes a timestamped receipt to `<target>/.build-md-install-receip
 
 ## What It Does
 
-Build.MD is a **meta-skill** — it teaches AI coding agents and human contributors the same project management conventions through a shared contract.
+GitSpec is a **meta-skill** — it teaches AI coding agents and human contributors the same project management conventions through a shared contract.
 
 - **AGENTS.md** as the canonical instruction file (Linux Foundation standard, native to Codex)
 - **Platform adapters** for Claude Code, Cursor (`.mdc`), GitHub Copilot, and VS Code
@@ -64,7 +64,7 @@ Build.MD is a **meta-skill** — it teaches AI coding agents and human contribut
 Explicit non-goals. If a future version breaks any of these, that's a regression.
 
 - **No network calls during install.** Installer reads/writes only in the local clone and target directory.
-- **No telemetry.** Build.MD does not phone home. Ever.
+- **No telemetry.** GitSpec does not phone home. Ever.
 - **No global configuration changes.** `git config` writes are repo-local. Shell configs (`.bashrc`, `.zshrc`) are not modified.
 - **No external services.** No Jira, Linear, Slack, or webhook integrations. The repo is the only backend.
 - **No binary artifacts.** Every tracked file is plain text.
@@ -72,7 +72,7 @@ Explicit non-goals. If a future version breaks any of these, that's a regression
 
 ## Architecture
 
-Build.MD uses a nine-layer architecture. See [SKILL.md](SKILL.md) for the full technical spec.
+GitSpec uses a nine-layer architecture. See [SKILL.md](SKILL.md) for the full technical spec.
 
 | Layer | What It Does |
 |-------|-------------|
@@ -95,6 +95,10 @@ Build.MD uses a nine-layer architecture. See [SKILL.md](SKILL.md) for the full t
 | `/distill STORY-NNN` | Synthesize raw notes into an ADR |
 | `/status-check` | Health check — orphaned TODOs, missing trailers, stale stories |
 | `/pr-prep` | Distill notes + generate PR description + validate trailers |
+| `/onboard-agent` | Brief a fresh agent on the repo's conventions and current backlog |
+| `/rebuild-ledger` | Re-derive `.ledger/changes.json` from git log when it has drifted |
+
+Plus the global `/gitspec` skill — invoke from any Claude Code session to learn what GitSpec is, get install instructions, or see the architecture.
 
 ## Agent Compatibility
 
@@ -117,7 +121,7 @@ Build.MD uses a nine-layer architecture. See [SKILL.md](SKILL.md) for the full t
 
 ## Principles
 
-Build.MD ships with 24 curated principles from leading AI companies and researchers. They're embedded into agent configs during init and updated via `scripts/refresh-principles.py`.
+GitSpec ships with 24 curated principles from leading AI companies and researchers. They're embedded into agent configs during init and updated via `scripts/refresh-principles.py`.
 
 Sources include: Anthropic, OpenAI, NVIDIA, xAI, Google DeepMind, Meta FAIR, Microsoft, SSI, Andrej Karpathy, LangChain, Ramp, Replit, Harvey AI, ToltIQ, Hebbia, and Sakana AI.
 
@@ -130,7 +134,7 @@ By design. Clone the repo first, then run `./scripts/install.sh`. See the [Insta
 You're running in CI or piping input. Pass `--yes` for non-interactive mode, or `--dry-run` to preview.
 
 **`ERROR: source tree incomplete — missing ...`**
-The `build-md` clone is missing files. Re-clone with `git clone https://github.com/Jimthetaxguy/build-md.git`.
+The `gitspec` clone is missing files. Re-clone with `git clone https://github.com/Jimthetaxguy/gitspec.git`.
 
 **`ERROR: target directory does not exist`**
 Create the target directory first: `mkdir -p /path/to/project && ./scripts/install.sh /path/to/project`.
@@ -143,7 +147,7 @@ The dashboard reads from `.ledger/changes.json` and `docs/`. Create at least one
 
 ## Project Status
 
-Build.MD is a released **skills pack**, not an actively-maintained service. The author is not committing to ongoing maintenance, issue response, or PR review. Use it, fork it, adapt it — that's what the MIT license is for. See [CHANGELOG.md](CHANGELOG.md) for what shipped and [CONTRIBUTING.md](CONTRIBUTING.md) if you'd still like to send a PR upstream.
+GitSpec is a released **skills pack**, not an actively-maintained service. The author is not committing to ongoing maintenance, issue response, or PR review. Use it, fork it, adapt it — that's what the MIT license is for. See [CHANGELOG.md](CHANGELOG.md) for what shipped and [CONTRIBUTING.md](CONTRIBUTING.md) if you'd still like to send a PR upstream.
 
 ## Security and Warranty
 
@@ -153,7 +157,7 @@ If you find a security issue, you may open a private GitHub Security Advisory (*
 
 ## Repository
 
-**GitHub:** [github.com/Jimthetaxguy/build-md](https://github.com/Jimthetaxguy/build-md)
+**GitHub:** [github.com/Jimthetaxguy/gitspec](https://github.com/Jimthetaxguy/gitspec)
 
 ## License
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build.MD Traceability Graph Generator
+GitSpec Traceability Graph Generator
 
 Reads the ledger, story/spec directories, and scans source files for rnpm[...]
 annotations to build a complete traceability graph. Outputs .ledger/graph.json

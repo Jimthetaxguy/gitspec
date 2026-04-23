@@ -1,10 +1,10 @@
-# Contributing to Build.MD
+# Contributing to GitSpec
 
-Build.MD is a **released skills pack**, not an actively-maintained service. Pull requests and issues are welcome but there is no commitment that any PR or issue will be reviewed, responded to, or merged. If you need guaranteed maintenance or continuous development, please fork the project — the MIT License explicitly permits this.
+GitSpec is a **released skills pack**, not an actively-maintained service. Pull requests and issues are welcome but there is no commitment that any PR or issue will be reviewed, responded to, or merged. If you need guaranteed maintenance or continuous development, please fork the project — the MIT License explicitly permits this.
 
 If you'd still like to contribute upstream, the guidelines below describe what a good contribution looks like.
 
-## What belongs in Build.MD
+## What belongs in GitSpec
 
 **Good fits:**
 - Fixes to the installer, hooks, or helper scripts.
@@ -16,7 +16,7 @@ If you'd still like to contribute upstream, the guidelines below describe what a
 **Probably out of scope:**
 - New layers in the nine-layer architecture.
 - New runtime dependencies (Python packages, Node modules, shell libraries).
-- External service integrations (Jira, Linear, Slack, etc.). Build.MD is repo-native by design.
+- External service integrations (Jira, Linear, Slack, etc.). GitSpec is repo-native by design.
 - Telemetry, analytics, or any network call during install.
 
 ## Workflow
@@ -28,7 +28,7 @@ If you'd still like to contribute upstream, the guidelines below describe what a
 
 ## Commit style
 
-Commit messages follow the same convention Build.MD installs for its users:
+Commit messages follow the same convention GitSpec installs for its users:
 
 ```
 <type>: <short imperative summary>

@@ -1,6 +1,6 @@
 ---
 name: new-story
-description: Scaffold a new Build.MD user story with auto-incremented ID and correct frontmatter
+description: Scaffold a new GitSpec user story with auto-incremented ID and correct frontmatter
 ---
 
 Create a new user story file in `docs/stories/`.

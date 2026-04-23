@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Build.MD Change Ledger",
+  "title": "GitSpec Change Ledger",
   "description": "Schema for .ledger/changes.json — the append-only change log",
   "type": "object",
   "required": ["version", "generated", "entries"],
