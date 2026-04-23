@@ -90,6 +90,15 @@ done
 mkdir -p .agents
 [ -f "$BUILD_MD_ROOT/principles/PRINCIPLES.md" ] && cp "$BUILD_MD_ROOT/principles/PRINCIPLES.md" ".agents/"
 
+# Copy slash commands (for Claude Code and compatible agents)
+if [ -d "$BUILD_MD_ROOT/commands" ]; then
+  mkdir -p .claude/commands
+  for cmd in "$BUILD_MD_ROOT/commands/"*.md; do
+    [ -f "$cmd" ] && cp "$cmd" ".claude/commands/"
+  done
+  echo "✓ Slash commands installed to .claude/commands/"
+fi
+
 echo "✓ Templates copied"
 
 # ── Step 5: Install git hooks ──

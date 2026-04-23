@@ -205,10 +205,26 @@ claude install-skill https://github.com/org/build-md
 
 The installer:
 1. Detects which agent tools are present
-2. Writes only the adapters for installed tools
+2. Writes adapters for installed tools + slash commands to `.claude/commands/`
 3. Symlinks hooks into `.git/hooks/`
 4. Creates the canonical `AGENTS.md`
 5. Builds the initial manifest so the applet works immediately
+
+## Slash Commands
+
+Build.MD includes slash commands that give agents (and users) hands-on tools.
+The skill teaches the agent how to think; the commands tell it what to do.
+
+| Command | What It Does |
+|---|---|
+| `/new-story "title"` | Scaffold a story file with auto-incremented ID and correct frontmatter |
+| `/new-spec "domain" "title"` | Scaffold a spec with domain-scoped ID |
+| `/distill STORY-NNN` | Synthesize raw notes into a structured ADR |
+| `/status-check` | Health check — orphaned TODOs, missing trailers, stale stories, spec coverage |
+| `/pr-prep` | Distill notes + generate PR description + validate trailers |
+
+Commands live in `commands/` and are installed to `.claude/commands/` during setup.
+For Cursor, they can be invoked conversationally ("run a status check on Build.MD").
 
 ### Initialize
 
