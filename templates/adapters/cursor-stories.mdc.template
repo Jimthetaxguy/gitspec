@@ -1,0 +1,34 @@
+---
+description: "Rules for authoring and modifying user stories in docs/stories/"
+alwaysApply: false
+globs:
+  - "docs/stories/**/*.md"
+---
+
+# Story Authoring Rules
+
+When creating or editing files in `docs/stories/`:
+
+## Required Frontmatter
+
+```yaml
+---
+id: STORY-NNN
+title: "Descriptive title"
+status: {{STATUS_VALUES_FIRST}}
+owner: contributor-name
+priority: medium
+acceptance:
+  - "Criterion 1"
+updated_at: YYYY-MM-DD
+---
+```
+
+## Rules
+
+- Story IDs are sequential (`STORY-001`, `STORY-002`, ...) and never reused
+- Status must be one of: {{STATUS_VALUES}}
+- Completed stories go to `docs/stories/archive/` — never delete
+- Link to parent spec via `spec: SPEC-XXX-NNN` when applicable
+- Acceptance criteria use Markdown checkboxes: `- [ ] Criterion`
+- If editing as an AI agent, set `locked_by` and `locked_at` in frontmatter

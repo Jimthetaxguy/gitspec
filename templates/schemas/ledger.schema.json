@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Build.MD Change Ledger",
+  "description": "Schema for .ledger/changes.json — the append-only change log",
+  "type": "object",
+  "required": ["version", "generated", "entries"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1",
+      "description": "Schema version"
+    },
+    "generated": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the ledger was last updated (ISO 8601)"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "commit", "author", "date", "type", "signal", "summary"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^CHG-\\d{4,}$",
+            "description": "Sequential change ID (e.g., CHG-0001)"
+          },
+          "commit": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$",
+            "description": "Full Git commit hash"
+          },
+          "shortHash": {
+            "type": "string",
+            "description": "Short commit hash (first 7 chars)"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author name and email"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Commit date (ISO 8601)"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["feat", "fix", "perf", "refactor", "docs", "test", "revert"],
+            "description": "Conventional commit type"
+          },
+          "scope": {
+            "type": ["string", "null"],
+            "description": "Conventional commit scope"
+          },
+          "signal": {
+            "type": "string",
+            "enum": ["critical", "notable", "conditional"],
+            "description": "Significance level"
+          },
+          "summary": {
+            "type": "string",
+            "description": "First line of commit message"
+          },
+          "body": {
+            "type": "string",
+            "description": "Commit message body"
+          },
+          "specs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Referenced SPEC IDs"
+          },
+          "stories": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Referenced STORY IDs"
+          },
+          "notes": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Referenced note files"
+          },
+          "filesChanged": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Paths of modified files"
+          },
+          "breakingChange": {
+            "type": "boolean",
+            "description": "Whether this commit includes a breaking change"
+          },
+          "supersededBy": {
+            "type": ["string", "null"],
+            "description": "ID of entry that supersedes this one (e.g., for reverts)"
+          },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Custom tags for filtering"
+          },
+          "schemaVersion": {
+            "type": "string",
+            "description": "Version of the entry schema"
+          }
+        }
+      },
+      "description": "Chronological list of significant changes"
+    }
+  }
+}

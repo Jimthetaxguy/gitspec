@@ -1,0 +1,37 @@
+---
+description: "Build.MD repo-native project management conventions — stories, specs, commits, notes"
+alwaysApply: true
+globs:
+---
+
+# Build.MD Core Rules
+
+This project uses Build.MD for repo-native project management. Read `AGENTS.md` at the
+project root for the full contract.
+
+## Key Conventions
+
+- Specs live in `docs/specs/SPEC-{domain}-{number}.md` with YAML frontmatter
+- Stories live in `docs/stories/STORY-{number}.md` with YAML frontmatter
+- Status vocabulary: {{STATUS_VALUES}}
+- feat/fix commits require `Story:` or `Spec:` trailers
+- Working notes go in `docs/notes/{contributor}/{YYYY-MM-DD}.md`
+- Never hand-edit `.ledger/changes.json`
+- Before PR: distill raw notes into an ADR in `docs/decisions/`
+
+## Before Implementing
+
+1. Check `docs/specs/` for relevant requirements
+2. Check `docs/stories/` for the target story and its acceptance criteria
+3. If no story exists for the work, create one first
+
+## Commit Format
+
+```
+type(scope): description
+
+Story: STORY-NNN
+Spec: SPEC-XXX-NNN
+```
+
+Types: feat, fix, perf, refactor, docs, test, chore, style, ci

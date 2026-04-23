@@ -1,0 +1,67 @@
+#!/bin/bash
+# Build.MD Pre-Push Hook
+#
+# Validates the ledger and commit trailers before pushing to remote.
+# Ensures all feat/fix commits in the push range have Story:/Spec: trailers.
+
+set -e
+
+# Read stdin to get the push refspecs
+while read local_ref local_oid remote_ref remote_oid; do
+    if [ "$remote_ref" = "(delete)" ]; then
+        # Skip deletion refs
+        continue
+    fi
+
+    # Determine the merge base for diffing
+    if [ -z "$remote_oid" ] || [ "$remote_oid" = "0000000000000000000000000000000000000000" ]; then
+        # New branch: compare against the default branch (usually main/master)
+        base=$(git merge-base "$local_oid" "$(git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4-)")
+    else
+        # Existing branch: compare against remote
+        base="$remote_oid"
+    fi
+
+    # Rebuild ledger from the push range
+    echo "Building ledger for push range: ${base}..${local_oid}"
+    python3 scripts/ledger-update.py --since "$base"
+
+    # Check if ledger is stale (manually edited)
+    if ! python3 scripts/ledger-update.py --validate; then
+        echo "Error: Ledger validation failed. Ledger may have been manually edited."
+        echo "Run 'python scripts/ledger-update.py --full-rebuild' to fix."
+        exit 1
+    fi
+
+    # Validate feat/fix commits have Story:/Spec: trailers
+    echo "Validating commit trailers in push range..."
+    commits=$(git rev-list "${base}..${local_oid}" --pretty=format:%H 2>/dev/null | grep -v '^commit')
+    has_error=0
+
+    for sha in $commits; do
+        subject=$(git log -1 --format=%s "$sha")
+        body=$(git log -1 --format=%b "$sha")
+        full_msg="${subject}"$'\n'"${body}"
+
+        # Extract commit type
+        ctype=$(echo "$subject" | sed -En 's/^([a-z]+)(\(.+\))?(!)?:.*/\1/p')
+
+        # Skip trailers check for non-significant types
+        if [ "$ctype" = "feat" ] || [ "$ctype" = "fix" ]; then
+            # Check for Story: or Spec: trailers
+            if ! echo "$full_msg" | grep -qE '(Story|Spec):'; then
+                echo "Error: ${sha:0:7} (${ctype}): missing Story: or Spec: trailer"
+                has_error=1
+            fi
+        fi
+    done
+
+    if [ $has_error -eq 1 ]; then
+        echo "Commit validation failed. Add Story:/Spec: trailers to feat/fix commits."
+        exit 1
+    fi
+
+    echo "Pre-push validation OK"
+done
+
+exit 0

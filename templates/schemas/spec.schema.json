@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Build.MD Spec",
+  "description": "Schema for requirement spec YAML frontmatter in docs/specs/",
+  "type": "object",
+  "required": ["id", "title", "status", "owner"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SPEC-[A-Z0-9]+-\\d{3,6}$",
+      "description": "Unique spec identifier (e.g., SPEC-AUTH-003)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Human-readable spec title"
+    },
+    "status": {
+      "$ref": "rnpm-status.schema.json#/definitions/specStatus"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Team or person responsible"
+    },
+    "stories": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Story IDs that implement this spec"
+    },
+    "decision_records": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "ADR IDs related to this spec"
+    },
+    "paths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Glob patterns for source files implementing this spec"
+    },
+    "acceptance": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "High-level acceptance criteria"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

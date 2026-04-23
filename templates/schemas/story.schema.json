@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Build.MD Story",
+  "description": "Schema for user story YAML frontmatter in docs/stories/",
+  "type": "object",
+  "required": ["id", "title", "status", "owner"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^STORY-\\d{3,6}$",
+      "description": "Unique story identifier (e.g., STORY-042)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Human-readable story title"
+    },
+    "status": {
+      "$ref": "rnpm-status.schema.json#/definitions/storyStatus"
+    },
+    "spec": {
+      "type": "string",
+      "pattern": "^SPEC-[A-Z0-9-]+$",
+      "description": "Parent spec ID (optional)"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Contributor responsible for this story"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low"],
+      "default": "medium"
+    },
+    "blocked_by": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "IDs of blocking stories or specs"
+    },
+    "acceptance": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Acceptance criteria"
+    },
+    "locked_by": {
+      "type": ["string", "null"],
+      "description": "Contributor or agent currently editing (lock)"
+    },
+    "locked_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the lock was acquired"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    }
+  }
+}

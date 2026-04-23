@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+# Build.MD commit-msg hook
+# Validates commit message format and trailer references.
+# Enforcement level is configured during init.
+
+set -euo pipefail
+
+COMMIT_MSG_FILE="$1"
+COMMIT_MSG="$(cat "$COMMIT_MSG_FILE")"
+
+# ── Config ──
+# Set to "gentle", "standard", or "strict"
+ENFORCEMENT="${BUILD_MD_ENFORCEMENT:-standard}"
+
+# ── Parse commit type ──
+SUBJECT=$(head -1 "$COMMIT_MSG_FILE")
+
+if ! echo "$SUBJECT" | grep -qE '^(feat|fix|perf|refactor|docs|test|chore|style|ci|revert)(\([^)]+\))?!?:'; then
+  if [ "$ENFORCEMENT" = "gentle" ]; then
+    echo "⚠️  Build.MD: Commit doesn't follow Conventional Commits format."
+    echo "   Expected: type(scope): description"
+    echo "   Continuing anyway (gentle enforcement)."
+    exit 0
+  else
+    echo "❌ Build.MD: Commit must follow Conventional Commits format."
+    echo "   Expected: type(scope): description"
+    echo ""
+    echo "   Types: feat, fix, perf, refactor, docs, test, chore, style, ci"
+    echo "   Example: feat(auth): add JWT refresh token logic"
+    exit 1
+  fi
+fi
+
+# ── Check for Story/Spec trailers on feat/fix ──
+TYPE=$(echo "$SUBJECT" | grep -oE '^(feat|fix)')
+
+if [ -n "$TYPE" ]; then
+  HAS_STORY=$(echo "$COMMIT_MSG" | grep -cE '^Story:\s+STORY-[0-9]+' || true)
+  HAS_SPEC=$(echo "$COMMIT_MSG" | grep -cE '^Spec:\s+SPEC-[A-Z0-9-]+' || true)
+
+  if [ "$HAS_STORY" -eq 0 ] && [ "$HAS_SPEC" -eq 0 ]; then
+    if [ "$ENFORCEMENT" = "gentle" ]; then
+      echo "⚠️  Build.MD: feat/fix commits should include a Story: or Spec: trailer."
+      echo "   Example footer:"
+      echo "   Story: STORY-042"
+      exit 0
+    else
+      echo "❌ Build.MD: feat/fix commits require a Story: or Spec: trailer."
+      echo ""
+      echo "   Add one of these to your commit message footer:"
+      echo "   Story: STORY-042"
+      echo "   Spec: SPEC-AUTH-003"
+      echo ""
+      echo "   The referenced ID must match a file in docs/stories/ or docs/specs/"
+      exit 1
+    fi
+  fi
+
+  # ── Validate referenced IDs exist ──
+  if [ "$ENFORCEMENT" = "strict" ]; then
+    # Check Story references
+    echo "$COMMIT_MSG" | grep -oE 'Story:\s+STORY-[0-9]+' | while read -r line; do
+      STORY_ID=$(echo "$line" | grep -oE 'STORY-[0-9]+')
+      if ! find docs/stories -name "${STORY_ID}*" -print -quit 2>/dev/null | grep -q .; then
+        echo "❌ Build.MD: Story '${STORY_ID}' not found in docs/stories/"
+        exit 1
+      fi
+    done
+
+    # Check Spec references
+    echo "$COMMIT_MSG" | grep -oE 'Spec:\s+SPEC-[A-Z0-9-]+' | while read -r line; do
+      SPEC_ID=$(echo "$line" | grep -oE 'SPEC-[A-Z0-9-]+')
+      if ! find docs/specs -name "${SPEC_ID}*" -print -quit 2>/dev/null | grep -q .; then
+        echo "❌ Build.MD: Spec '${SPEC_ID}' not found in docs/specs/"
+        exit 1
+      fi
+    done
+  fi
+fi
+
+echo "✓ Build.MD: Commit message validated"

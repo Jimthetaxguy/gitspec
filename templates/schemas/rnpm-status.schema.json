@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "rnpm-status.schema.json",
+  "title": "Build.MD Shared Status Enumerations",
+  "description": "Reusable enum definitions for story, spec, change signals, and enforcement levels",
+  "definitions": {
+    "storyStatus": {
+      "type": "string",
+      "enum": ["backlog", "ready", "in_progress", "in_review", "done", "blocked", "archived"],
+      "description": "Story workflow status"
+    },
+    "specStatus": {
+      "type": "string",
+      "enum": ["draft", "proposed", "active", "implemented", "deprecated"],
+      "description": "Spec lifecycle status"
+    },
+    "changeSignal": {
+      "type": "string",
+      "enum": ["critical", "notable", "conditional"],
+      "description": "Significance level of a change (commit type → signal mapping)"
+    },
+    "enforcementLevel": {
+      "type": "string",
+      "enum": ["gentle", "standard", "strict"],
+      "description": "Enforcement strictness for ledger and trailer requirements"
+    }
+  }
+}
