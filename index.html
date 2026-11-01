@@ -28,6 +28,13 @@
       .x-plan li b { display: inline-block; min-width: 3.4em; }
       .x-plan li.x-leg { color: var(--text-secondary); font-size: var(--size-caption); padding: 6px 0 6px 3.4em; }
       .x-plans .btn { align-self: flex-start; margin-top: auto; }
+      .x-plans .callout { max-width: none; }
+      .x-plans .callout .callout__lead { font-size: var(--size-small); color: var(--text-primary); }
+
+      /* Deals strip */
+      .x-deals { margin-bottom: 16px; }
+      .x-deals h3 { font: var(--type-label); margin-bottom: 8px; }
+      .x-deals .x-vs__chips .x-f { min-height: var(--tap); }
 
       /* Filter bar */
       .x-bar {
@@ -520,13 +527,41 @@
 
         <section class="section" id="plans" data-nav="Plans">
           <div class="head">
-            <h2>Eight ready-made days, each a tap from My Day.</h2>
-            <p class="head__sub">Open a plan for its timed route. Tap a stop to see its card.</p>
+            <h2>Nine ready-made days, each a tap from My Day.</h2>
+            <p class="head__sub">Open a plan for its timed route. Tap a stop to see its card. 🐕 marks how well each suits Spooky.</p>
           </div>
           <div class="cards x-plans">
+            <div id="plan-I">
+              <h3>I · Spooky's Downtown Stroll</h3>
+              <p class="x-meta"><span class="pill">Manhattan</span> <span class="pill">🐕 dog-friendly</span> <span class="pill">Free to $</span></p>
+              <p>For you, Tiffany and Spooky: a flea market, the Hudson waterfront, two dog runs and a Village sunset, all off the marathon course.</p>
+              <aside class="callout" aria-label="Bringing Spooky">
+                <p class="callout__lead"><strong>No dogs on the High Line, Little Island or in museums;</strong> on the subway he rides in a bag.</p>
+              </aside>
+              <details class="x-plan">
+                <summary>Timed itinerary</summary>
+                <ul>
+                  <li><b>8:30</b> Morning walk with Spooky in <a class="link" href="#ev-i60" data-go="i60">Hunters Point South Park</a>. Center Blvd is off the course. Dress for a low near <span data-wx="lo">38</span>°F.</li>
+                  <li class="x-leg">10:00 · 7 train to 34 St–Hudson Yards with Spooky in a carry bag (MTA requires pets in a bag or carrier), or Uber/Lyft Pet. NYC Ferry now allows leashed dogs (kept within 2 ft), but its stops are on the East Side.</li>
+                  <li><b>10:30</b> <a class="link" href="#ev-i90" data-go="i90">Chelsea Flea</a>, 29 W 25th St, 8am–5pm, dog-friendly</li>
+                  <li class="x-leg">Walk west</li>
+                  <li><b>11:45</b> <a class="link" href="https://hudsonriverpark.org/activities/chelsea-waterside-dog-park/" target="_blank" rel="noopener">Chelsea Waterside Dog Park</a>, 11th Ave &amp; W 23rd St: small- and large-dog areas, 6am–1am (cleaning 10–11am and 2–3pm)</li>
+                  <li><b>12:30</b> Stroll south on the Hudson River Park esplanade (leashed, dogs off the lawns). See <a class="link" href="#ev-i111" data-go="i111">Little Island</a> from outside; dogs aren't allowed in. Stop at Gansevoort Peninsula Dog Park.</li>
+                  <li><b>1:30</b> Lunch at a dog-friendly patio in the Meatpacking/West Village</li>
+                  <li><b>2:30</b> Washington Square Park (leashed dogs welcome; it has a dog run), then wander SoHo</li>
+                  <li><b>4:30</b> Pier 45 at Christopher St for the 4:52 sunset. Leroy Street Dog Park is next door.</li>
+                  <li class="x-leg">Home: Uber/Lyft Pet, or the subway with Spooky in his bag</li>
+                </ul>
+              </details>
+              <div class="links">
+                <a class="btn" href="https://hudsonriverpark.org/activities/chelsea-waterside-dog-park/" target="_blank" rel="noopener">Chelsea Waterside</a>
+                <a class="btn" href="https://hudsonriverpark.org/dog-guide-to-hrpk/" target="_blank" rel="noopener">Dogs in Hudson River Park</a>
+              </div>
+              <button class="btn x-btn" type="button" data-plan="s1@510,s2@630,s3@705,s4@750,s5@810,s6@870,s7@990">Add whole plan to My Day</button>
+            </div>
             <div>
               <h3>A · Halfway Home</h3>
-              <p class="x-meta"><span class="pill">LIC</span> <span class="pill">~Free + food</span></p>
+              <p class="x-meta"><span class="pill">LIC</span> <span class="pill">~Free + food</span> <span class="pill" title="Outdoor parts only">🐕 partly</span></p>
               <p>Cheer the halfway mark, walk the LIC art circuit, end at a Gantry sunset.</p>
               <details class="x-plan">
                 <summary>Timed itinerary</summary>
@@ -547,7 +582,7 @@
             </div>
             <div>
               <h3>B · Día de Muertos in the East Village</h3>
-              <p class="x-meta"><span class="pill">LIC → Manhattan</span> <span class="pill">Free to $$</span></p>
+              <p class="x-meta"><span class="pill">LIC → Manhattan</span> <span class="pill">Free to $$</span> <span class="pill">🐕 partly</span></p>
               <p>Cheer at home, then altars, Aztec dance and mariachi downtown.</p>
               <details class="x-plan">
                 <summary>Timed itinerary</summary>
@@ -565,7 +600,7 @@
             </div>
             <div>
               <h3>C · Sci-Fi Sunday</h3>
-              <p class="x-meta"><span class="pill">Manhattan + Brooklyn</span> <span class="pill">$$</span></p>
+              <p class="x-meta"><span class="pill">Manhattan + Brooklyn</span> <span class="pill">$$</span> <span class="pill">🐕 not dog-friendly</span></p>
               <p>A robot musical, AI art, space VR and Blade Runner with a live score.</p>
               <details class="x-plan">
                 <summary>Timed itinerary</summary>
@@ -583,7 +618,7 @@
             </div>
             <div>
               <h3>D · Sunday Day Party (EDM)</h3>
-              <p class="x-meta"><span class="pill">Queens + Brooklyn</span> <span class="pill">$–$$$</span></p>
+              <p class="x-meta"><span class="pill">Queens + Brooklyn</span> <span class="pill">$–$$$</span> <span class="pill">🐕 not dog-friendly</span></p>
               <p>Cheer, brunch, then outdoor house into a free DJ afterparty.</p>
               <details class="x-plan">
                 <summary>Timed itinerary</summary>
@@ -599,7 +634,7 @@
             </div>
             <div>
               <h3>E · Ride the 7: Queens food &amp; culture</h3>
-              <p class="x-meta"><span class="pill">Queens</span> <span class="pill">$</span></p>
+              <p class="x-meta"><span class="pill">Queens</span> <span class="pill">$</span> <span class="pill">🐕 not dog-friendly</span></p>
               <p>Markets, altars, the Panorama and dumplings, all on one train line.</p>
               <details class="x-plan">
                 <summary>Timed itinerary</summary>
@@ -619,7 +654,7 @@
             </div>
             <div>
               <h3>F · Ferry hop &amp; Brooklyn fall</h3>
-              <p class="x-meta"><span class="pill">Brooklyn</span> <span class="pill">Free to $$</span></p>
+              <p class="x-meta"><span class="pill">Brooklyn</span> <span class="pill">Free to $$</span> <span class="pill">🐕 partly</span></p>
               <p>Cheer on the Greenpoint stretch, two flea markets, then a rooftop or the park.</p>
               <details class="x-plan">
                 <summary>Timed itinerary</summary>
@@ -636,7 +671,7 @@
             </div>
             <div>
               <h3>G · Leaf-peeping uptown</h3>
-              <p class="x-meta"><span class="pill">Upper Manhattan</span> <span class="pill">Free to $$</span></p>
+              <p class="x-meta"><span class="pill">Upper Manhattan</span> <span class="pill">Free to $$</span> <span class="pill">🐕 partly</span></p>
               <p>Old forest, the Cloisters, and hockey or a free concert at night.</p>
               <details class="x-plan">
                 <summary>Timed itinerary</summary>
@@ -652,7 +687,7 @@
             </div>
             <div>
               <h3>H · Rainy-day / low-key backup</h3>
-              <p class="x-meta"><span class="pill">Indoors</span> <span class="pill">Free to $</span></p>
+              <p class="x-meta"><span class="pill">Indoors</span> <span class="pill">Free to $</span> <span class="pill">🐕 not dog-friendly</span></p>
               <p>Four indoor stops, none near the course.</p>
               <details class="x-plan">
                 <summary>Itinerary</summary>
@@ -673,6 +708,10 @@
           <div class="head">
             <h2>Everything worth doing tomorrow, 126 picks.</h2>
             <p class="head__sub">Choices within a group widen results; across groups they narrow.</p>
+          </div>
+          <div class="x-deals">
+            <h3>Deals, giveaways &amp; pop-ups</h3>
+            <div class="x-vs__chips" id="deals" role="group" aria-label="Deals, giveaways and pop-ups"></div>
           </div>
           <div class="x-bar" role="search">
             <div class="x-row">
@@ -734,6 +773,16 @@
                 <li>Sunset is 4:52pm; put outdoor stops first.</li>
               </ul>
             </div>
+            <div id="spooky">
+              <h3>Bringing Spooky?</h3>
+              <ul>
+                <li>No dogs on the High Line or Little Island (service animals only).</li>
+                <li>No dogs in museums or most indoor venues.</li>
+                <li>Subway and buses: dog must be in a bag or carrier. <a class="link" href="https://www.mta.info/guides/pets" target="_blank" rel="noopener">MTA pet rules</a></li>
+                <li>NYC Ferry: leashed dogs OK, within 2 ft. <a class="link" href="https://www.ferry.nyc/blog/updated-nyc-ferry-pet-policy" target="_blank" rel="noopener">Policy updated June 2026</a></li>
+                <li>Off-leash runs: Chelsea Waterside (W 23rd), Gansevoort Peninsula, Leroy St (Pier 40), Tribeca (Pier 25/26).</li>
+              </ul>
+            </div>
           </div>
           <p class="fineprint">Some prices and hours come from third-party listings. Tap through to confirm before you go.</p>
         </section>
@@ -773,9 +822,9 @@
           <a class="btn" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8601m6a8af7me5pb040z02asa9rt" target="_blank" rel="noopener">Open the guide in a new tab</a>
         </div>
         <div class="x-vs__chips" role="group" aria-label="Suggestions">
-          <button type="button" class="x-f" data-ask>What should we do after cheering?</button>
-          <button type="button" class="x-f" data-ask>Best free stuff in Brooklyn this afternoon</button>
-          <button type="button" class="x-f" data-ask>Plan a sci‑fi evening</button>
+          <button type="button" class="x-f" data-ask>Dog-friendly walk in Chelsea?</button>
+          <button type="button" class="x-f" data-ask>Free stuff and giveaways today</button>
+          <button type="button" class="x-f" data-ask>What’s near the West Village at sunset?</button>
         </div>
         <form class="x-vs__form" id="vs-form">
           <input class="x-search" id="vs-input" type="text" placeholder="Type a question" aria-label="Message the guide" autocomplete="off" enterkeyhint="send" />
@@ -857,6 +906,19 @@
 
         var byId = {};
         EVENTS.forEach(function (e, i) { e._i = i; e._t = parseStart(e.date_time); byId[e.id] = e; });
+        /* Plan I stops: map points of their own, not Explore cards */
+        [
+          ["s1", "Morning walk with Spooky, Hunters Point South Park", "Queens", "Hunters Point", "Center Blvd, Long Island City, NY", "Open all day", 40.7425, -73.9590, "i60"],
+          ["s2", "Chelsea Flea", "Manhattan", "Chelsea", "29 W 25th St, New York, NY", "8am–5pm, dog-friendly", 40.7440, -73.9900, "i90"],
+          ["s3", "Chelsea Waterside Dog Park", "Manhattan", "Chelsea", "11th Ave & W 23rd St, New York, NY", "6am–1am (cleaning 10–11am and 2–3pm)", 40.7489, -74.0075, null, "https://hudsonriverpark.org/activities/chelsea-waterside-dog-park/"],
+          ["s4", "Hudson River Park esplanade + Gansevoort Peninsula Dog Park", "Manhattan", "Meatpacking", "Gansevoort Peninsula, Hudson River Park, New York, NY", "Leashed on the esplanade, dogs off the lawns", 40.7392, -74.0110, null, "https://hudsonriverpark.org/dog-guide-to-hrpk/"],
+          ["s5", "Lunch on a dog-friendly patio", "Manhattan", "Meatpacking/West Village", "", "Your pick", null, null],
+          ["s6", "Washington Square Park, then SoHo", "Manhattan", "Greenwich Village", "Washington Square Park, New York, NY", "Leashed dogs welcome; has a dog run", 40.7308, -73.9973],
+          ["s7", "Sunset at Pier 45, Christopher St", "Manhattan", "West Village", "Pier 45, Hudson River Park, New York, NY", "Sunset 4:52pm; Leroy Street Dog Park next door", 40.7330, -74.0115]
+        ].forEach(function (r, i) {
+          byId[r[0]] = { id: r[0], name: r[1], borough: r[2], neighborhood: r[3], address: r[4], date_time: r[5], price: r[0] === "s5" ? "$" : "Free", free: r[0] !== "s5",
+            tags: ["Outdoors & Fall"], link: r[9] || "", _ll: r[6] != null ? [r[6], r[7]] : null, _t: null, _i: 1000 + i, _go: r[8] || null, _plan: "plan-I" };
+        });
 
         var state = { q: "", boro: [], cost: [], tod: [], tag: [], sort: "rec" };
         var myDay = []; /* { id, t } */
@@ -972,6 +1034,18 @@
 
         /* ---------- Jump to a card from a plan ---------- */
         function goTo(id) {
+          var st = byId[id];
+          if (st && st._plan) {
+            if (st._go) id = st._go;
+            else {
+              var pc = document.getElementById(st._plan);
+              if (!pc) return;
+              var pd = pc.querySelector("details");
+              if (pd) pd.open = true;
+              pc.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+              return;
+            }
+          }
           var el = document.getElementById("ev-" + id);
           if (!el) { clearFilters(); render(); el = document.getElementById("ev-" + id); }
           if (!el) return;
@@ -987,6 +1061,29 @@
           ev.preventDefault();
           goTo(a.dataset.go);
         });
+
+        /* ---------- Deals strip ---------- */
+        var dealsEl = document.getElementById("deals");
+        var DEALS = [
+          ["Club CELSIUS Race Day · free gifting, Greenpoint", /Club CELSIUS/i],
+          ["Gottesman Rink opening day · free skate, DJ, swag", /Gottesman Rink/i],
+          ["Noguchi Museum · last half-price day", /Noguchi Museum/i],
+          ["LIC Bar · free marathon breakfast", /LIC Bar/i],
+          ["Fifth Hammer marathon party", /Fifth Hammer/i],
+          ["Mano a Mano Día de Muertos · free", /Mano a Mano/i],
+          ["Maybe Happy Ending · $49 digital rush, 11am", /Maybe Happy Ending/i],
+          ["Museum of the City of New York · free watch party", /Museum of the City of New York/i],
+          ["NYRR Victory Lap", /Victory Lap/i]
+        ];
+        dealsEl.innerHTML = DEALS.map(function (d) {
+          var e = EVENTS.filter(function (x) { return d[1].test(x.name); })[0];
+          return e ? '<button type="button" class="x-f" data-go="' + esc(e.id) + '">' + esc(d[0]) + "</button>" : "";
+        }).join("");
+        if (!dealsEl.children.length) dealsEl.parentNode.hidden = true;
+        function dealsEnd() { dealsEl.classList.toggle("is-end", dealsEl.scrollLeft + dealsEl.clientWidth >= dealsEl.scrollWidth - 4); }
+        dealsEl.addEventListener("scroll", dealsEnd, { passive: true });
+        window.addEventListener("resize", dealsEnd);
+        dealsEnd();
 
         /* ---------- Plans ---------- */
         var planStatus = document.getElementById("plan-status");
@@ -1201,6 +1298,7 @@
           document.getElementById("wx-sum").textContent = summary(d);
           var dm = mode(nums(d.hours.filter(function (x) { return x.t >= 540 && x.t <= 960; }).map(function (x) { return x.code; })));
           document.getElementById("hero-wx").textContent = (dm != null ? wmo(dm, 720).w + ", " : "") + Math.round(d.lo) + "°F → " + Math.round(d.hi) + "°F";
+          [].forEach.call(document.querySelectorAll("[data-wx]"), function (s) { s.textContent = Math.round(s.dataset.wx === "hi" ? d.hi : d.lo); });
           drawGlance();
         }
         function loadWx() {
@@ -1232,7 +1330,7 @@
           var title = b.parentNode.querySelector("h3").textContent;
           return { key: title.charAt(0), title: title, stops: b.dataset.plan.split(",").map(function (s) { var p = s.split("@"); return { id: p[0], t: p[1] ? +p[1] : null }; }) };
         });
-        var gSel = "A";
+        var gSel = "I";
         gChips.innerHTML = PLANS.map(function (p) {
           return '<button type="button" class="x-f" data-gplan="' + p.key + '" aria-pressed="' + (p.key === gSel) + '" title="' + esc(p.title) + '">' + p.key + "</button>";
         }).join("") + '<button type="button" class="x-f" data-gplan="my" aria-pressed="false">My Day</button>';
@@ -1805,7 +1903,7 @@
           var s = String(v || "").trim();
           if (!s) return null;
           if (/\bmy\b/i.test(s) || /^my ?day$/i.test(s)) return "my";
-          var m = s.match(/^(?:plan\s*)?([a-h])(?:\b|\s|·|$)/i);
+          var m = s.match(/^(?:plan\s*)?([a-i])(?:\b|\s|·|$)/i);
           if (m && (s.length <= 6 || /^plan/i.test(s))) return m[1].toUpperCase();
           var n = norm(s);
           var hit = D.plans.filter(function (p) { return norm(p.title).indexOf(n) > -1; })[0] ||
@@ -1815,7 +1913,7 @@
         var TOOLS = {
           show_plan: function (p) {
             var key = planKey(p && p.plan);
-            if (!key || !D.selectPlan(key)) return "Plan not found. Plans are A–H or 'my'.";
+            if (!key || !D.selectPlan(key)) return "Plan not found. Plans are A–I or 'my'.";
             scrollToId("glance");
             if (key === "my") return "Showing " + dayText();
             var plan = D.plans.filter(function (x) { return x.key === key; })[0];
